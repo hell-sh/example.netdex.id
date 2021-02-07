@@ -1,0 +1,6 @@
+{
+    "require": {
+    	"ext-openssl": "*",
+        "hell-sh/smw": "^1.0"
+    }
+}
