@@ -15,6 +15,7 @@ require "src/include.php";
 		</div>
 		<div id="logged-in" class="uk-hidden">
 			<h1>Hi there<span id="display_name"></span>!</h1>
+			<img id="user-pic" style="width:100px;height:100px" />
 			<p>
 				<a id="add-display-name" class="uk-button uk-button-primary" href="https://netdex.id/app_auth/<?=$netdex_app_id;?>?scopes=display_name">Add your display name</a>
 				<a id="edit-display-name" class="uk-hidden uk-button uk-button-default" onclick="netdex.updateDisplayName();">Edit your display name</a>
@@ -42,6 +43,9 @@ require "src/include.php";
 
 		if(localStorage.getItem("user_token"))
 		{
+			let user_id=atob(localStorage.getItem("user_token")).split(":")[1];
+			document.getElementById("user-pic").src="https://api.netdex.id/v1/user_pic/"+user_id;
+
 			document.getElementById("logged-out").classList.add("uk-hidden");
 			document.getElementById("logged-in").classList.remove("uk-hidden");
 			if(localStorage.getItem("user_display_name"))
