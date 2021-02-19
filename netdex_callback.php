@@ -41,43 +41,34 @@ if(PHP_MAJOR_VERSION < 8)
 
 require "src/include.php";
 
-$res = $db->query("SELECT `display_name`,`biography` FROM `users` WHERE `netdex_id`=?", "s", $user_data["id"]);
+$display_name = $user_data["display_name"] ?? "";
+$bio = $user_data["bio"] ?? "";
+
+$res = $db->query("SELECT `display_name`,`bio`,`text` FROM `users` WHERE `netdex_id`=?", "s", $user_data["id"]);
 if($res)
 {
-	if(array_key_exists("display_name", $user_data) && $res[0]["display_name"] != $user_data["display_name"])
+	if($res[0]["display_name"] != $display_name)
 	{
-		$display_name = $user_data["display_name"];
-		$db->query("UPDATE `users` SET `display_name`=? WHERE `netdex_id`=?", "ss", $user_data["display_name"], $user_data["id"]);
+		$db->query("UPDATE `users` SET `display_name`=? WHERE `netdex_id`=?", "ss", $display_name, $user_data["id"]);
 	}
-	else
+	if($res[0]["bio"] != $bio)
 	{
-		$display_name = $res[0]["display_name"];
+		$db->query("UPDATE `users` SET `bio`=? WHERE `netdex_id`=?", "ss", $bio, $user_data["id"]);
 	}
+	$text = $res[0]["text"];
 }
 else
 {
-	if(array_key_exists("display_name", $user_data))
-	{
-		$display_name = $user_data["display_name"];
-		$db->query("INSERT INTO `users` (`netdex_id`, `display_name`) VALUES (?, ?)", "ss", $user_data["id"], $user_data["display_name"]);
-	}
-	else
-	{
-		$display_name = "";
-		$db->query("INSERT INTO `users` (`netdex_id`) VALUES (?)", "s", $user_data["id"]);
-	}
+	$db->query("INSERT INTO `users` (`netdex_id`, `display_name`, `bio`) VALUES (?, ?, ?)", "sss", $user_data["id"], $display_name, $bio);
+	$text = "";
 }
 
 $token = signData("netdex_id", $user_data["id"]);
-$biography = "";
-if($res[0]["biography"])
-{
-	$biography = $res[0]["biography"];
-}
 ?>
 <script>
 	localStorage.setItem("user_token", JSON.parse('<?=json_encode($token, JSON_HEX_APOS); ?>'));
 	localStorage.setItem("user_display_name", JSON.parse('<?=json_encode($display_name, JSON_HEX_APOS); ?>'));
-	localStorage.setItem("user_biography", JSON.parse('<?=json_encode($biography, JSON_HEX_APOS); ?>'));
+	localStorage.setItem("user_bio", JSON.parse('<?=json_encode($bio, JSON_HEX_APOS); ?>'));
+	localStorage.setItem("user_text", JSON.parse('<?=json_encode($text, JSON_HEX_APOS); ?>'));
 	location.href="/";
 </script>

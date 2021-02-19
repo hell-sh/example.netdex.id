@@ -16,15 +16,18 @@ require "src/include.php";
 		<div id="logged-in" class="uk-hidden">
 			<h1>Hi there<span id="display_name"></span>!</h1>
 			<img id="user-pic" style="width:100px;height:100px" />
+			<p id="bio" class="uk-hidden"></p>
 			<p>
 				<a id="add-display-name" class="uk-button uk-button-primary" href="https://netdex.id/app_auth/<?=$netdex_app_id;?>?scopes=display_name">Add your display name</a>
 				<a id="edit-display-name" class="uk-hidden uk-button uk-button-default" onclick="netdex.updateDisplayName();">Edit your display name</a>
+				<a id="add-bio" class="uk-button uk-button-primary" href="https://netdex.id/app_auth/<?=$netdex_app_id;?>?scopes=bio">Add your bio</a>
+				<a id="edit-bio" class="uk-hidden uk-button uk-button-default" onclick="netdex.updateBio();">Edit your bio</a>
 				<a class="uk-button uk-button-secondary" onclick="logout();">Log out</a>
 			</p>
-			<h2>Biography</h2>
-			<form method="POST" action="update_biography.php">
+			<h2>Your Personal Text</h2>
+			<form method="POST" action="update_text.php">
 				<input type="hidden" name="user_token" />
-				<input type="text" name="biography" class="uk-input" />
+				<input type="text" name="text" class="uk-input" />
 				<input type="submit" class="uk-button uk-button-primary" value="Save" />
 			</form>
 			<h2>I'm over it</h2>
@@ -54,7 +57,14 @@ require "src/include.php";
 				document.getElementById("edit-display-name").classList.remove("uk-hidden");
 				document.getElementById("display_name").textContent = ", " + localStorage.getItem("user_display_name");
 			}
-			document.querySelector("[name='biography']").value=localStorage.getItem("user_biography");
+			if(localStorage.getItem("user_bio"))
+			{
+				document.getElementById("add-bio").classList.add("uk-hidden");
+				document.getElementById("edit-bio").classList.remove("uk-hidden");
+				document.getElementById("bio").textContent = "Your bio: " + localStorage.getItem("user_bio");
+				document.getElementById("bio").classList.remove("uk-hidden");
+			}
+			document.querySelector("[name='text']").value=localStorage.getItem("user_text");
 			document.querySelectorAll("[name='user_token']").forEach(elm=>{
 				elm.value = localStorage.getItem("user_token");
 			});

@@ -67,7 +67,7 @@ This will be used to create and verify user tokens using cryptography instead of
 Finally, we will create a table to store our users' data in database called `netdex_example`:
 
 ```SQL
-CREATE TABLE `netdex_example`.`users` ( `netdex_id` CHAR(16) NOT NULL , `display_name` VARCHAR(64) NOT NULL DEFAULT '' , `biography` VARCHAR(255) NOT NULL DEFAULT '' ) ENGINE = InnoDB;
+CREATE TABLE `netdex_example`.`users` ( `netdex_id` CHAR(16) NOT NULL, `display_name` VARCHAR(64) NOT NULL, `bio` tinytext NOT NULL, `text` tinytext NOT NULL DEFAULT '' ) ENGINE = InnoDB;
 ```
 
 You can also give the database any name you want, but the table name `users` is hard-coded. In any case, you may want to double-check that the `include.php` in the "src" folder is correctly configured to use your database.
