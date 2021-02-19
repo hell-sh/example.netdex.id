@@ -76,8 +76,8 @@ if($res[0]["biography"])
 }
 ?>
 <script>
-	localStorage.setItem("user_token", JSON.parse('<?=json_encode($token, JSON_HEX_QUOT); ?>'));
-	localStorage.setItem("user_display_name", JSON.parse('<?=json_encode($display_name, JSON_HEX_QUOT); ?>'));
-	localStorage.setItem("user_biography", JSON.parse('<?=json_encode($biography, JSON_HEX_QUOT); ?>'));
+	localStorage.setItem("user_token", JSON.parse('<?=json_encode($token, JSON_HEX_APOS); ?>'));
+	localStorage.setItem("user_display_name", JSON.parse('<?=json_encode($display_name, JSON_HEX_APOS); ?>'));
+	localStorage.setItem("user_biography", JSON.parse('<?=json_encode($biography, JSON_HEX_APOS); ?>'));
 	location.href="/";
 </script>
