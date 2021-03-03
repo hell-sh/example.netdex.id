@@ -72,6 +72,6 @@ CREATE TABLE `netdex_example`.`users` ( `netdex_id` CHAR(16) NOT NULL, `display_
 
 You can also give the database any name you want, but the table name `users` is hard-coded. In any case, you may want to double-check that the `include.php` in the "src" folder is correctly configured to use your database.
 
-And with that your server is configured, except for the "netdex app id", which we will obtain by creating a new app at https://netdex.id/dev/apps with the callback set to POST `netdex_callback.php` on our webserver.
+And with that your server is configured, except for the "netdex app id", which we will obtain by creating a new app at https://netdex.id/myapps with the callback set to POST `netdex_callback.php` on our webserver.
 
 But once you have the app id filled in, you should have your very own copy of this project live, and you can freely change it into your own website! :D
