@@ -8,7 +8,7 @@ if(empty($_POST["user_data"])||empty($_POST["user_data_sig"]))
 $user_data=json_decode($_POST["user_data"],true);
 if(time() - $user_data["time"] > 6)
 {
-	die("Netdex has signed your data too long ago. <a href='/'>Back to homepage.</a>");
+	die("Netdex has signed your data too long ago. <a href='.'>Back to homepage.</a>");
 }
 
 // netdex.id public key, as obtained from https://api.netdex.id/v1/public_key
@@ -70,5 +70,5 @@ $token = signData("netdex_id", $user_data["id"]);
 	localStorage.setItem("user_display_name", JSON.parse('<?=json_encode($display_name, JSON_HEX_APOS); ?>'));
 	localStorage.setItem("user_bio", JSON.parse('<?=json_encode($bio, JSON_HEX_APOS); ?>'));
 	localStorage.setItem("user_text", JSON.parse('<?=json_encode($text, JSON_HEX_APOS); ?>'));
-	location.href="/";
+	location.href=".";
 </script>

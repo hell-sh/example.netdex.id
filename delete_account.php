@@ -12,5 +12,5 @@ $db->query("DELETE FROM `users` WHERE `netdex_id`=?", "s", verifyData("netdex_id
 <script src="common.js"></script>
 <script>
 	removeUserItems();
-	location.href="/";
+	location.href=".";
 </script>
