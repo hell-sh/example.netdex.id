@@ -1,0 +1,3 @@
+LICENSE text eof=lf
+*.js text eof=lf
+*.php text eof=lf
