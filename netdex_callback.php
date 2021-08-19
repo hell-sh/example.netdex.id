@@ -12,22 +12,7 @@ if(time() - $user_data["time"] > 6)
 }
 
 // netdex.id public key, as obtained from https://api.netdex.id/v1/public_key
-$key = openssl_pkey_get_public(<<<EOC
------BEGIN PUBLIC KEY-----
-MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtp/qRPCCv/p7aFDJgTsQ
-LML1elZhleEP65qaOJemSjCNY1RgA2woXcr1HpBcmayMKsrq3w/sHfu455C3+Rz2
-oVoD4FHu8kt5DHzTWTA7iQsdQTFKo4yFgQedrtNS4heKLwoEkFUCp37lA95p6Hgf
-/TixWoxIiFoqXwZucCbqBJgQx/+EU1qHClC6byd19olflx5PC9Mcq8jqm/O5++ba
-wTjZ8jLzz8NC0eCGSYjBVe12jVnKQNKAA5qBazHjgivqDCdfCqLgyFxz1FKxkXdp
-54ioP2IPyIlLSD9pYRnC2tmYOFFE4l6nFOuK7tvO42oa25K+nL3E89bsMp0Fcvk8
-rJBzgEUnCrgNoqVj4Bggx0aPSatjhd4KsCYa4hG+bpefFoC8FIkL+cDlOGDbTNcm
-TaN31EUzvb9o1rYp1D6XtZEEv1dmXyeJENVDu/mPx8NABfmXhSMSkWdDIBF9cUsc
-wYwVXMIMzfv4wLWLiVpsse3+mzDIVrG83gMkmLCqRU/BrTT+HOXiQ+hXxiuyz1nW
-lCfjSsH/s+QGiNRQtnpD6wNFVJHtvmpqZoUumdXtdd6r5wT24q0Mrst8PI7DMXfN
-BgpA/omCQ80mD/g6fyaEzmFDi9b6/JaAp9fe51DJZJGZD+veGDntzIqbn5qxh9MR
-1L0hDDrqpgJGe0rXZ3qYyGECAwEAAQ==
------END PUBLIC KEY-----
-EOC);
+$key = openssl_pkey_get_public("-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtp/qRPCCv/p7aFDJgTsQLML1elZhleEP65qaOJemSjCNY1RgA2woXcr1HpBcmayMKsrq3w/sHfu455C3+Rz2oVoD4FHu8kt5DHzTWTA7iQsdQTFKo4yFgQedrtNS4heKLwoEkFUCp37lA95p6Hgf/TixWoxIiFoqXwZucCbqBJgQx/+EU1qHClC6byd19olflx5PC9Mcq8jqm/O5++bawTjZ8jLzz8NC0eCGSYjBVe12jVnKQNKAA5qBazHjgivqDCdfCqLgyFxz1FKxkXdp54ioP2IPyIlLSD9pYRnC2tmYOFFE4l6nFOuK7tvO42oa25K+nL3E89bsMp0Fcvk8rJBzgEUnCrgNoqVj4Bggx0aPSatjhd4KsCYa4hG+bpefFoC8FIkL+cDlOGDbTNcmTaN31EUzvb9o1rYp1D6XtZEEv1dmXyeJENVDu/mPx8NABfmXhSMSkWdDIBF9cUscwYwVXMIMzfv4wLWLiVpsse3+mzDIVrG83gMkmLCqRU/BrTT+HOXiQ+hXxiuyz1nWlCfjSsH/s+QGiNRQtnpD6wNFVJHtvmpqZoUumdXtdd6r5wT24q0Mrst8PI7DMXfNBgpA/omCQ80mD/g6fyaEzmFDi9b6/JaAp9fe51DJZJGZD+veGDntzIqbn5qxh9MR1L0hDDrqpgJGe0rXZ3qYyGECAwEAAQ==\n-----END PUBLIC KEY-----");
 
 if(openssl_verify($_POST["user_data"], base64_decode($_POST["user_data_sig"]), $key) != 1)
 {
